@@ -30,10 +30,12 @@ rng = Random.new
 now = Time.zone.today
 User.all.each do |user|
   30.times do |i|
+    number_of_holes = [9, 18].sample
     Score.create!(
       user: user,
-      total_score: rng.rand(66..99),
-      played_at: now - 30.days + i.days
+      total_score: number_of_holes == 9 ? rng.rand(27..90) : rng.rand(54..180),
+      number_of_holes: number_of_holes,
+      played_at: now - 30.days + i.days,
     )
   end
 end
