@@ -33,7 +33,7 @@ class Score < ApplicationRecord
 
   def score_based_holes
     errors.add(:number_of_holes, 'wrong range of scores based on number of holes') if
-      (total_score < 54 && total_score > 180 && number_of_holes == 18) ||
-      (total_score < 27 && total_score > 90 && number_of_holes == 9)
+      ((total_score < 54 || total_score > 180) && number_of_holes == 18) ||
+      ((total_score < 27 || total_score > 90) && number_of_holes == 9)
   end
 end
