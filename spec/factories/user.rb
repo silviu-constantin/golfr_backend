@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :user do
-    name { 'Test User' }
-    email { 'test@user.com' }
+    name { 'George Marcus' }
+    email { 'gmarcus@golfr.com' }
   end
 end

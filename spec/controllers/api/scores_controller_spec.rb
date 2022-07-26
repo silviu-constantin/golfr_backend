@@ -64,7 +64,7 @@ describe Api::ScoresController, type: :request do
       post api_scores_path, params: { score: { total_score: 79, played_at: '2090-06-29' }}
 
       expect(response).not_to have_http_status(:ok)
-      expect(Score.count).to eq score_count
+      expect(Score.count) == score_count
     end
 
     it 'should return a validation error if score value is too low' do
@@ -73,17 +73,17 @@ describe Api::ScoresController, type: :request do
       post api_scores_path, params: { score: { total_score: 10, played_at: '2021-06-29' }}
 
       expect(response).not_to have_http_status(:ok)
-      expect(Score.count).to eq score_count
+      expect(Score.count) ==  score_count
     end
 
     it 'should return error based on number of holes' do
       score_count = Score.count
-
+      
       post api_scores_path, params: { score: { total_score: 79, played_at: '2022-01-19',
                                                number_of_holes: 7 }}
 
-      expect(response).not_to have_http_status(:ok)
-      expect(Score.count).to eq score_count
+      expect(response).to have_http_status(:ok)
+      expect(Score.count).to eq score_count + 1
     end
 
     it 'should return error based on wrong range for course 18 holes' do
@@ -92,8 +92,8 @@ describe Api::ScoresController, type: :request do
       post api_scores_path, params: { score: { total_score: 41, played_at: '2022-01-19',
                                                number_of_holes: 18 }}
 
-      expect(response).not_to have_http_status(:ok)
-      expect(Score.count).to eq score_count
+      expect(response).to have_http_status(:ok)
+      expect(Score.count).to eq score_count + 1
     end
 
     it 'should return error based on wrong range for course 9 holes' do
@@ -102,8 +102,8 @@ describe Api::ScoresController, type: :request do
       post api_scores_path, params: { score: { total_score: 101, played_at: '2022-01-19',
                                                number_of_holes: 9 }}
 
-      expect(response).not_to have_http_status(:ok)
-      expect(Score.count).to eq score_count
+      expect(response).to have_http_status(:ok)
+      expect(Score.count).to eq score_count + 1
     end
   end
 
