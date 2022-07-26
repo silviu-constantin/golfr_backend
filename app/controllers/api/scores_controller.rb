@@ -17,8 +17,6 @@ module Api
 
     def create
       score = current_user.scores.build(score_params)
-      holes = score.total_score >= 27 && score.total_score < 90 ? 9 : 18
-      score.update_attribute(:number_of_holes, holes)
 
       if score.save
         current_user.send_email(score)
