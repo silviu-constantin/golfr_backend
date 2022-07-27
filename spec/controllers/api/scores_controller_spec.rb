@@ -78,7 +78,7 @@ describe Api::ScoresController, type: :request do
 
     it 'should return error based on number of holes' do
       score_count = Score.count
-
+      
       post api_scores_path, params: { score: { total_score: 79, played_at: '2022-01-19',
                                                number_of_holes: 7 }}
 

@@ -19,6 +19,7 @@ module Api
       score = current_user.scores.build(score_params)
 
       if score.save
+        current_user.send_email(score)
         render json: {
           score: score.serialize
         }
